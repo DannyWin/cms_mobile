@@ -3,6 +3,11 @@ import logo from './logo.svg';
 import './App.less';
 import {Button} from 'antd-mobile'
 
+const CustomIcon = ({ type="", className = '',  ...restProps }) => (
+  <svg className={`${className}`} {...restProps}>
+    <use xlinkHref={type} /> 
+  </svg>
+);
 function App() {
   return (
     <div className="App">
@@ -20,9 +25,15 @@ function App() {
           Learn React
         </a>
       </header>
-      <Button type="primary"  size="large">aaa</Button>
+      <svg className="icon" aria-hidden="true" fontSize="20">
+        <use xlinkHref="#icon-eye-close"></use>
+      </svg>
+      <Button type="primary"  size="large">
+      <CustomIcon type="#icon-eye-close" className="icon"></CustomIcon>
+        aaa</Button>
     </div>
   );
 }
+
 
 export default App;

@@ -70,7 +70,7 @@ module.exports = function(webpackEnv) {
   const env = getClientEnvironment(paths.publicUrlOrPath.slice(0, -1));
 
   // common function to get style loaders
-  const getStyleLoaders = (cssOptions, lessOptions, preProcessor) => {
+  const getStyleLoaders = (cssOptions, preProcessor, lessOptions) => {
     const loaders = [
       isEnvDevelopment && require.resolve('style-loader'),
       isEnvProduction && {
@@ -84,15 +84,6 @@ module.exports = function(webpackEnv) {
       {
         loader: require.resolve('css-loader'),
         options: cssOptions,
-      },
-      {
-        loader: require.resolve('less-loader'),
-        options: {
-          lessOptions:{
-            ...lessOptions,
-            javascriptEnabled:true
-          }
-        },
       },
       {
         // Options for PostCSS as we reference these options twice
@@ -132,6 +123,12 @@ module.exports = function(webpackEnv) {
           loader: require.resolve(preProcessor),
           options: {
             sourceMap: true,
+            ...(lessOptions?{
+              lessOptions:{
+                ...lessOptions,
+                javascriptEnabled:true
+              }
+            }:{})
           },
         }
       );
@@ -382,7 +379,7 @@ module.exports = function(webpackEnv) {
                 ),
                 
                 plugins: [
-                  ["import", { "libraryName": "antd-mobile", "style": "css" }], // `style: true` 会加载 less 文件
+                  ["import", { "libraryName": "antd-mobile", "style": true }], // `style: true` 会加载 less 文件
                   [
                     require.resolve('babel-plugin-named-asset-import'),
                     {
@@ -466,37 +463,13 @@ module.exports = function(webpackEnv) {
             {
               test: lessRegex,
               exclude: lessModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-              }),
-              // Don't consider CSS imports dead code even if the
-              // containing package claims to have no side effects.
-              // Remove this when webpack adds a warning or an error for this.
-              // See https://github.com/webpack/webpack/issues/6571
-              sideEffects: true,
-            },
-            // Adds support for CSS Modules (https://github.com/css-modules/css-modules)
-            // using the extension .module.css
-            {
-              test: lessModuleRegex,
-              use: getStyleLoaders({
-                importLoaders: 1,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: {
-                  getLocalIdent: getCSSModuleLocalIdent,
-                },
-              }),
-            },
-            {
-              test: lessRegex,
-              exclude: lessModuleRegex,
               use: getStyleLoaders(
                 {
                   importLoaders: 3,
                   sourceMap: isEnvProduction && shouldUseSourceMap,
                 },
-                'less-loader'
+                'less-loader',
+                {}
               ),
 
               sideEffects: true,
@@ -511,7 +484,8 @@ module.exports = function(webpackEnv) {
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
                 },
-                'less-loader'
+                'less-loader',
+                {}
               ),
             },
             // Opt-in support for SASS (using .scss or .sass extensions).
