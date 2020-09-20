@@ -2,7 +2,6 @@ import React from 'react';
 import './App.less';
 import {Switch} from 'react-router-dom'
 import RouteWithSubRoutes,{IRoute,routes} from './route'
-
 // function App() {
 //   return (
 //     <div className="App">
@@ -32,6 +31,7 @@ import RouteWithSubRoutes,{IRoute,routes} from './route'
 
 const App:React.FC=()=>{
   return(
+
     <Switch>
       {routes.map((route:IRoute,index:number)=>(
         <RouteWithSubRoutes key={index} {...route}/>

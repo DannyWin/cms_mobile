@@ -7,5 +7,5 @@ interface ILoginParams{
     pwd:string
 }
 
-export const login = async (params:ILoginParams) => await axios.post('/login',params).then( ( res ) => res );
+export const apiLogin = async (params:ILoginParams) => await axios.post('/login',params).then( ( res ) => res );
 

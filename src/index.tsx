@@ -4,12 +4,16 @@ import './index.less';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import {Provider} from 'mobx-react'
+import store from './store/store'
 
 ReactDOM.render(
   <React.StrictMode>
+    <Provider {...store}>
     <BrowserRouter>
     <App />
     </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

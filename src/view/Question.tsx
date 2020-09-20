@@ -2,7 +2,7 @@ import React from 'react';
 import {Flex,WhiteSpace,WingBlank,Button, InputItem} from 'antd-mobile'
 import {CustomIcon} from '../component/CustomIcon'
 
-const Login:React.FC=()=>{
+const Question:React.FC=()=>{
 
     return (
         <>
@@ -30,4 +30,4 @@ const Login:React.FC=()=>{
         </>
     )
 }
-export default Login
+export default Question
