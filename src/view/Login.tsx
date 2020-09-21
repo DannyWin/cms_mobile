@@ -1,23 +1,34 @@
 import React,{useState} from 'react';
-import {Flex,WhiteSpace,WingBlank,Button, InputItem} from 'antd-mobile'
+import {withRouter,RouteComponentProps} from 'react-router';
+import {Flex,WhiteSpace,WingBlank,Button, InputItem,Toast} from 'antd-mobile'
 import {CustomIcon} from '../component/CustomIcon'
 import {observer,inject} from 'mobx-react'
 import {apiLogin} from '../api/api'
+import {InputItemPropsType} from 'antd-mobile/lib/input-item/PropsType'
+
+interface IProps extends RouteComponentProps{
+
+}
+
 // @inject([MyMobx])
 // @observer
-const Login:React.FC=()=>{
+const Login:React.FC<IProps>=(props)=>{
     //let account={uid:'',pwd:''};
     let [uid,uidChange]=useState('');
     let [pwd,pwdChange]=useState('');
-    function login(){
+    let [inputType,inputTypeChange]=useState<InputItemPropsType['type']>('password');
+    async function login(){
         //const {uid,pwd}=account;
-        if(uid==='' || uid===undefined){
-
+        if(uid==='' || uid===undefined ||pwd==='' || pwd===undefined){
+            return  Toast.fail('Uid or Pwd must not be empty!',2);
         }
-        if(pwd==='' || pwd===undefined){
-
+        const result=await apiLogin({uid,pwd});
+        if(result.status===200){
+            Toast.success('Login successully!',2);
+            props.history.push('/home');
+        }else{
+            Toast.fail('Uid or Pwd is wrong!',2);
         }
-        apiLogin({uid,pwd})
     }
     return (
         <>
@@ -29,7 +40,7 @@ const Login:React.FC=()=>{
                     <CustomIcon type="#icon-user"></CustomIcon>
                 </InputItem>
 
-                <InputItem placeholder="pwd"  value={pwd} onChange={(val)=>pwdChange(val)} type='password' extra={<CustomIcon type="#icon-eye"></CustomIcon>}>
+                <InputItem placeholder="pwd"  value={pwd} onChange={(val)=>pwdChange(val)} type={inputType} extra={<CustomIcon type="#icon-eye"></CustomIcon>} onExtraClick={()=>inputTypeChange(inputType==='password'?'text':'password')}>
                     <CustomIcon type="#icon-lock"></CustomIcon>
                 </InputItem>
 
@@ -44,4 +55,4 @@ const Login:React.FC=()=>{
         </>
     )
 }
-export default inject('MyMobx')(observer(Login));
+export default inject('MyMobx')(observer(withRouter(Login)));

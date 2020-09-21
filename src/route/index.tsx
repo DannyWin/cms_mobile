@@ -4,7 +4,7 @@ import Login from '../view/Login'
 import Home from '../view/Home'
 import Survey from '../view/Survey'
 import Question from '../view/Question'
-import { NOTFOUND } from 'dns';
+import NotFound from '../view/NotFound'
 
 export interface IRoute{
     path:string,
@@ -17,13 +17,13 @@ export interface IRoute{
 
 export const routes=[
     {path:'/login',component:Login},
-    {path:'/',component:Home},
-    {path:'/Survey',component:Survey,
+    {path:'/home', component:Home},
+    {path:'/survey',component:Survey,
         routes:[
             {path:'/Question',component:Question}
         ]
     },
-    {path:'*',component:NOTFOUND},
+    {path:'*',component:NotFound},
 
 ];
 
