@@ -24,6 +24,8 @@ const Login:React.FC<IProps>=(props)=>{
         }
         const result=await apiLogin({uid,pwd});
         if(result.status===200){
+            console.log(result)
+            window.localStorage.setItem("token", result.data.data.token);
             Toast.success('Login successully!',2);
             props.history.push('/home');
         }else{
