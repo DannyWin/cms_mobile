@@ -1,13 +1,13 @@
 import React from 'react';
 import {Flex,WhiteSpace,WingBlank,Button, InputItem} from 'antd-mobile'
 import {CustomIcon} from '../component/CustomIcon'
-import BasicLayout from '../layout/BasicLayout'
+import StepLayout from '../layout/StepLayout'
 
 const Home:React.FC=()=>{
 
     return (
         <>
-            <BasicLayout title="Home">
+            <StepLayout title="Home" current={1}>
             <div style={{display:'flex',alignItems:'center',height:'100%'}}>
                 <WingBlank style={{flex:1}}>
                     
@@ -28,7 +28,7 @@ const Home:React.FC=()=>{
                 
                 </WingBlank>
                 </div>
-            </BasicLayout>
+            </StepLayout>
         </>
     )
 }

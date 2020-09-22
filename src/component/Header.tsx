@@ -2,9 +2,11 @@ import React from 'react';
 import {Flex} from 'antd-mobile'
 //import {Flex,NavBar,Popover,WhiteSpace,WingBlank, InputItem} from 'antd-mobile'
 import {CustomIcon} from '../component/CustomIcon'
+import Step from '../component/Step'
 import '../asset/style/header.less'
 interface Props {
   title?: string,
+  current?:number
 }
 
 const Header:React.FC<Props>=(props)=>{
@@ -16,6 +18,7 @@ const Header:React.FC<Props>=(props)=>{
         <Flex.Item><CustomIcon type="#icon-menu"></CustomIcon></Flex.Item>
       </Flex>
       <div className="title"><strong>{props.title}</strong></div>
+      {props.current !==undefined && <Step current={props.current}></Step>}
     </div>
       // <>    
       //    <div style={{display:'flex',alignItems:'center',height:'100%'}}>

@@ -38,8 +38,8 @@ axios.interceptors.response.use(
         }
         if (error.response) {
             if (error.response.status === 401) {
-                var currentTime = new Date()
-                var refreshTime = new Date(Date.parse(window.localStorage.refreshTime))
+                //var currentTime = new Date()
+                //var refreshTime = new Date(Date.parse(window.localStorage.refreshTime))
                 // 在用户操作的活跃期内
                 // if (window.localStorage.refreshTime && (currentTime <= refreshTime)) {
                 //     return  refreshToken({token: window.localStorage.token}).then((res) => {
@@ -87,13 +87,6 @@ axios.interceptors.response.use(
         }
         return ""; // 返回接口返回的错误信息
 
-        // if (error.response.status === 401 ) {
-        // //window.location = '/login';
-        // } else if(error.response.status >=300 && error.response.status<500){
-        //     return error.response;
-        // }else {
-        //     return Promise.reject(error);
-        // }
     }
 )
   
@@ -113,14 +106,7 @@ axios.interceptors.response.use(
 
 // };
 
-// saveToken(state, data) {
-//     state.token = data;
-//     window.localStorage.setItem("token", data);
-// },
-// saveTokenExpire(state, data) {
-//     state.tokenExpire = data;
-//     window.localStorage.setItem("tokenExpire", data);
-// },
+
 
 export const saveRefreshTime = (params:any) => {
 
