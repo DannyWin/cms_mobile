@@ -1,5 +1,11 @@
 import { observable, action } from 'mobx'
-class Mobx {
+
+export interface IMobx{
+  number: number;
+  addNumber(number: number):void;
+}
+
+class Mobx implements IMobx{
   @observable number:number;
 
   constructor() {
@@ -7,13 +13,12 @@ class Mobx {
   }
 
   @action
-  addNumber = (number:number) => {
+  addNumber = (number:number):void => {
     this.number = number
   }
 
 }
-const MyMobx = new Mobx();
-export { MyMobx };
+export default new Mobx();
 
 
 // import { observable, computed, action, decorate } from 'mobx';

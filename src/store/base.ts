@@ -13,8 +13,7 @@ class Base {
   }
   getToken=()=>this.token;
 }
-const BaseMobx = new Base();
-export { BaseMobx };
+export default new Base();
 
 
 // import { observable, computed, action, decorate } from 'mobx';

@@ -5,20 +5,22 @@ import {CustomIcon} from '../component/CustomIcon'
 import {observer,inject} from 'mobx-react'
 import {apiLogin} from '../api/api'
 import {InputItemPropsType} from 'antd-mobile/lib/input-item/PropsType'
-
+import {IMobx} from '../store/mobx'
 interface IProps extends RouteComponentProps{
-
+    MyMobx?:IMobx
 }
 
 // @inject([MyMobx])
 // @observer
 const Login:React.FC<IProps>=(props)=>{
-    //let account={uid:'',pwd:''};
     let [uid,uidChange]=useState('');
     let [pwd,pwdChange]=useState('');
     let [inputType,inputTypeChange]=useState<InputItemPropsType['type']>('password');
+    // console.log(props.MyMobx?.number)
+    // console.log(new Date().getTime())
+    // props.MyMobx?.addNumber(1);
+    // console.log(props.MyMobx?.number)
     async function login(){
-        //const {uid,pwd}=account;
         if(uid==='' || uid===undefined ||pwd==='' || pwd===undefined){
             return  Toast.fail('Uid or Pwd must not be empty!',2);
         }

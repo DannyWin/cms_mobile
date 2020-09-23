@@ -1,8 +1,10 @@
-import { MyMobx } from './mobx'
+import MyMobx from './mobx'
+import BaseMobx from './base'
 
 
-const store = {
+const stores = {
+  BaseMobx,
   MyMobx
 }
 
-export default store
+export default stores
