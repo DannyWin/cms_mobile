@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from '../component/Header'
 import Footer from '../component/Footer'
+import '../asset/style/stepLayout.less'
 
 interface Props extends React.MapHTMLAttributes<HTMLElement>{
   style?: React.CSSProperties,
@@ -10,17 +11,14 @@ interface Props extends React.MapHTMLAttributes<HTMLElement>{
 }
 
 const StepLayout:React.FC<Props>=(props)=>{
-  return (
-    <div style={{display:"flex",flexDirection:'column',height:"100%"}}>
-     
-      <div style={{flex:1}}>
-      <Header {...props}></Header>
-         {props.children}
-         </div>
-         <div style={{height:"50px"}}>
-      <Footer ></Footer>
-      </div>
-    </div>
-  )
+    return (
+        <div className="stepLayout">
+            <div style={{flex:1}}>
+                <Header {...props}></Header>
+                {props.children}
+            </div>
+            <Footer ></Footer>
+        </div>
+    )
 }
 export default StepLayout
