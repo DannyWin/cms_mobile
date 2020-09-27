@@ -40,11 +40,11 @@ const Login:React.FC<IProps>=(props)=>{
             <WingBlank style={{flex:1}}>
                 
                 <div>Checkin Sysytem</div>
-                <InputItem placeholder="uid" value={uid} onChange={(val)=>uidChange(val)}>
+                <InputItem placeholder="uid" clear={true} value={uid} onChange={(val)=>uidChange(val)}>
                     <CustomIcon type="#icon-user"></CustomIcon>
                 </InputItem>
 
-                <InputItem placeholder="pwd"  value={pwd} onChange={(val)=>pwdChange(val)} type={inputType} extra={<CustomIcon type="#icon-eye"></CustomIcon>} onExtraClick={()=>inputTypeChange(inputType==='password'?'text':'password')}>
+                <InputItem placeholder="pwd" clear={true} value={pwd} onChange={(val)=>pwdChange(val)} type={inputType} extra={<CustomIcon type="#icon-eye"></CustomIcon>} onExtraClick={()=>inputTypeChange(inputType==='password'?'text':'password')}>
                     <CustomIcon type="#icon-lock"></CustomIcon>
                 </InputItem>
 

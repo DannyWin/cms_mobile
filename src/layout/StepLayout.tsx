@@ -11,11 +11,16 @@ interface Props extends React.MapHTMLAttributes<HTMLElement>{
 
 const StepLayout:React.FC<Props>=(props)=>{
   return (
-    <>
+    <div style={{display:"flex",flexDirection:'column',height:"100%"}}>
+     
+      <div style={{flex:1}}>
       <Header {...props}></Header>
          {props.children}
-      <Footer></Footer>
-    </>
+         </div>
+         <div style={{height:"50px"}}>
+      <Footer ></Footer>
+      </div>
+    </div>
   )
 }
 export default StepLayout

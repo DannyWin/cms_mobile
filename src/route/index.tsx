@@ -16,6 +16,7 @@ export interface IRoute{
 
 
 export const routes=[
+    {path:'/',exact:true,component:Login},
     {path:'/login',component:Login},
     {path:'/home', component:Home},
     {path:'/survey',component:Survey,
