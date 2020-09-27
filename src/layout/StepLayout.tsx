@@ -17,7 +17,7 @@ const StepLayout:React.FC<Props>=(props)=>{
                 <Header {...props}></Header>
                 {props.children}
             </div>
-            <Footer ></Footer>
+            <Footer></Footer>
         </div>
     )
 }
