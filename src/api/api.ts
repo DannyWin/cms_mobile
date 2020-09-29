@@ -131,3 +131,4 @@ interface ILoginParams{
 }
 
 export const apiLogin = async (params:ILoginParams) => await axios.post('/login',params).then( ( res ) => res );
+export const apiGetSurvey = async (roleid:number) => await axios.post(`/survey/${roleid}`,{}).then( ( res ) => res );

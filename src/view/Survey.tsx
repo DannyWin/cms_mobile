@@ -1,33 +1,36 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {Flex,WhiteSpace,WingBlank,Button, InputItem} from 'antd-mobile'
+import {withRouter,RouteComponentProps} from 'react-router';
 import {CustomIcon} from '../component/CustomIcon'
+import {observer,inject} from 'mobx-react'
+import {ISurvey,ISurveyMobx} from '../store/survey'
+import StepLayout from '../layout/StepLayout'
+import QuestionFooter from '../component/QuestionFooter';
+import {apiGetSurvey} from '../api/api'
 
-const Survey:React.FC=()=>{
+interface IProps extends RouteComponentProps{
+    id:number;
+    SurveyMobx?:ISurveyMobx
+}
+const Survey:React.FC<IProps>=(props)=>{
+    useEffect(()=>{
+        (async function GetSurvey(){
+            const result=await apiGetSurvey(123);
+            if(result.status===200){
+                props.SurveyMobx?.setSurvey(result.data as Array<ISurvey>);
+            }
+        })();
+    },[]);
 
     return (
-        <>
-            
-           <div style={{display:'flex',alignItems:'center',height:'100%'}}>
+        <StepLayout title="Survey" current={1}>
             <WingBlank style={{flex:1}}>
                 
-                <div>Checkin Sysytem</div>
-                <InputItem placeholder="uid">
-                    <CustomIcon type="#icon-user"></CustomIcon>
-                </InputItem>
-
-                <InputItem placeholder="pwd" type='password' extra={<CustomIcon type="#icon-eye"></CustomIcon>}>
-                    <CustomIcon type="#icon-lock"></CustomIcon>
-                </InputItem>
-
+                
                 <WhiteSpace size="lg" />
-                <Flex>
-                    <Flex.Item><Button type="primary" size='large'>Login</Button></Flex.Item>
-                    <Flex.Item><Button size='large'>Cancel</Button></Flex.Item>
-                </Flex>
-               
+                <QuestionFooter></QuestionFooter>
             </WingBlank>
-            </div>
-        </>
+        </StepLayout>
     )
 }
-export default Survey
+export default inject('SurveyMobx')(observer(Survey))
