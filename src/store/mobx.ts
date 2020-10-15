@@ -1,9 +1,6 @@
 import { observable, action } from 'mobx'
+import {IMobx} from '../interface/interface'
 
-export interface IMobx{
-  number: number;
-  addNumber(number: number):void;
-}
 
 class Mobx implements IMobx{
   @observable number:number;

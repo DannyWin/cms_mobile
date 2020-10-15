@@ -1,20 +1,9 @@
 import { observable, action } from 'mobx'
 import SurveyMobx from './survey'
-export interface IQuestion{
-  id:number;
-  content:string;
-  prev:number;
-  next:number;
-}
+import {IQuestion,IQuestionMobx} from '../interface/interface'
 
-export interface IQuestionMobx{
-  surveyId:number;
-  questions:Array<IQuestion>;
-  setSurveyId(id:number):void;
-  setQuestion(questions:Array<IQuestion>):void;
-}
 
-class QuestionMobx {
+class QuestionMobx implements IQuestionMobx{
   @observable surveyId:number;
   @observable questions:Array<IQuestion>;
 
@@ -22,15 +11,14 @@ class QuestionMobx {
     this.surveyId = 0;
     this.questions=[];
   }
-
   @action
   setSurveyId = (id:number):void => {
     this.surveyId = id;
   }
   @action
-  setQuestion = (questions:Array<IQuestion>):void => {
+  setQuestions = (questions:Array<IQuestion>):void => {
     this.questions = questions;
-    SurveyMobx.survey.filter(sur=>sur.id===this.surveyId)[0].questions=questions;
+    SurveyMobx.surveys.filter(survey=>survey.id===this.surveyId)[0].questions=questions;
   }
 }
 export default new QuestionMobx();

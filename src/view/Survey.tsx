@@ -1,36 +1,53 @@
-import React,{useEffect} from 'react';
-import {Flex,WhiteSpace,WingBlank,Button, InputItem} from 'antd-mobile'
+import React,{useState,useEffect} from 'react';
+import {Flex,WhiteSpace,WingBlank,Button,Radio, InputItem,List} from 'antd-mobile'
 import {withRouter,RouteComponentProps} from 'react-router';
 import {CustomIcon} from '../component/CustomIcon'
 import {observer,inject} from 'mobx-react'
-import {ISurvey,ISurveyMobx} from '../store/survey'
+import {ISurveyProps,ISurveyMobx,ISurvey} from '../interface/interface'
 import StepLayout from '../layout/StepLayout'
 import QuestionFooter from '../component/QuestionFooter';
 import {apiGetSurvey} from '../api/api'
 
-interface IProps extends RouteComponentProps{
-    id:number;
-    SurveyMobx?:ISurveyMobx
-}
-const Survey:React.FC<IProps>=(props)=>{
+
+const Survey:React.FC<ISurveyProps>=(props)=>{
+    let [checkedId,checkChange]=useState(0);
     useEffect(()=>{
         (async function GetSurvey(){
-            const result=await apiGetSurvey(123);
+            const result=await apiGetSurvey();
             if(result.status===200){
-                props.SurveyMobx?.setSurvey(result.data as Array<ISurvey>);
+                props.SurveyMobx?.setSurveys(result.data as Array<ISurvey>);
             }
         })();
     },[]);
 
+    function selectSurvey(){
+        if(props.SurveyMobx && checkedId>0){
+            const surveySelected=props.SurveyMobx.surveys.find(s=>s.id===checkedId);
+            if(surveySelected){
+                props.SurveyMobx?.setSelectedSurvey(surveySelected);
+                props.QuestionMobx.setQuestions(surveySelected.questions);
+                props.QuestionMobx.setSurveyId(surveySelected.id);
+            }
+            if(surveySelected && surveySelected.questions.length){
+                props.history.push(`/survey/${checkedId}/question/${surveySelected.questions[0].id}`);
+            }else{
+                props.history.push(`/notFound`);
+            }
+        }
+    }
+
+
     return (
         <StepLayout title="Survey" current={1}>
             <WingBlank style={{flex:1}}>
-                
-                
+                <List>
+                     { props.SurveyMobx?.surveys.map(survey=><Radio.RadioItem key={survey.id} checked={checkedId===survey.id} onChange={() => checkChange(survey.id)}>{survey.name}</Radio.RadioItem>)}
+                </List>
+
+                <Button type="primary" onClick={()=>selectSurvey()}>确定</Button>
                 <WhiteSpace size="lg" />
-                <QuestionFooter></QuestionFooter>
             </WingBlank>
         </StepLayout>
     )
 }
-export default inject('SurveyMobx')(observer(Survey))
+export default inject('SurveyMobx','QuestionMobx')(observer(withRouter(Survey)))

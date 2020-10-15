@@ -1,26 +1,22 @@
 import { observable, action } from 'mobx'
-import {IQuestion} from './question'
-export interface ISurvey{
-  id:number;
-  name:string;
-  questions:Array<IQuestion>
-}
+import {ISurvey,ISurveyMobx} from '../interface/interface'
 
-export interface ISurveyMobx{
-  survey:ISurvey;
-  setSurvey(survey:Array<ISurvey>):void;
-}
-
-class SurveyMobx {
-  @observable survey:Array<ISurvey>;
+class SurveyMobx implements ISurveyMobx{
+  @observable surveys:Array<ISurvey>;
+  @observable selectedSurvey:ISurvey;
 
   constructor() {
-    this.survey=[];
+    this.surveys=[];
+    this.selectedSurvey={id:0,name:'',order:0,questions:[]};
   }
 
   @action
-  setSurvey = (survey:Array<ISurvey>):void => {
-    this.survey = survey;
+  setSurveys = (surveys:Array<ISurvey>):void => {
+    this.surveys = surveys;
+  }
+  @action
+  setSelectedSurvey = (survey:ISurvey):void => {
+    this.selectedSurvey = survey;
   }
 }
 export default new SurveyMobx();

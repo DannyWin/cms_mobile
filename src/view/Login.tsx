@@ -5,14 +5,12 @@ import {CustomIcon} from '../component/CustomIcon'
 import {observer,inject} from 'mobx-react'
 import {apiLogin} from '../api/api'
 import {InputItemPropsType} from 'antd-mobile/lib/input-item/PropsType'
-import {IMobx} from '../store/mobx'
-interface IProps extends RouteComponentProps{
-    MyMobx?:IMobx
-}
+import {ILoginProps} from '../interface/interface'
+
 
 // @inject([MyMobx])
 // @observer
-const Login:React.FC<IProps>=(props)=>{
+const Login:React.FC<ILoginProps>=(props)=>{
     let [uid,uidChange]=useState('');
     let [pwd,pwdChange]=useState('');
     let [inputType,inputTypeChange]=useState<InputItemPropsType['type']>('password');

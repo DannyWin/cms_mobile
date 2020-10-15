@@ -3,6 +3,7 @@ import {Route} from 'react-router-dom';
 import Login from '../view/Login'
 import Home from '../view/Home'
 import Survey from '../view/Survey'
+import QuestionList from '../view/QuestionList'
 import Question from '../view/Question'
 import NotFound from '../view/NotFound'
 
@@ -21,7 +22,8 @@ export const routes=[
     {path:'/home', component:Home},
     {path:'/survey',component:Survey,
         routes:[
-            {path:'/Question',component:Question}
+            {path:'/:sid/question',exact:true,component:QuestionList},
+            {path:'/:sid/question/:qid',component:Question}
         ]
     },
     {path:'*',component:NotFound},

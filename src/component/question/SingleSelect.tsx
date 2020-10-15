@@ -1,43 +1,34 @@
 import React, { useState } from 'react';
 import {withRouter,RouteComponentProps} from 'react-router';
-import {Card,Button,WhiteSpace} from 'antd-mobile'
+import {observer,inject} from 'mobx-react'
+import {Card,Button,WhiteSpace,List,Radio} from 'antd-mobile'
 import {ButtonProps} from 'antd-mobile/lib/button/index'
 import { CardHeaderProps } from 'antd-mobile/lib/card/CardHeader';
-interface Props extends RouteComponentProps{
-    back:string,
-    next:string,
-    question:Question,
-    options:Array<Option>
-}
-interface Question extends CardHeaderProps
-{
-    id:number;
-}
-interface Option extends ButtonProps
-{
-    id:number,
-    content:string,
-}
+import {ISingleSelectProps,IQuestionMobx,IQuestion,IOption} from '../../interface/interface'
 
-const SingleSelect:React.FC<Props>=(props)=>{
+const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
     const [selectedId,changeSelectedId]=useState(0);
-    function goBack(){
-        props.history.goBack();
-    }
-    function goNext(){
-        //save result
-        props.history.push(props.next);
+    function handleSelectedId(id:number){
+        changeSelectedId(id);
+        if(props.OptionMobx){
+            props.OptionMobx?.setSelectedId(id);
+        }
     }
     return (
         <Card>
-            <Card.Header {...props.question}/>
+            <Card.Header/>
             <Card.Body>
-                {/* <div>This is content of `Card`</div> */}
-                {props.options.map(option=> (<><Button key={option.id} {...option} onClick={()=>changeSelectedId(option.id)}>{option.content}</Button><WhiteSpace size="lg" /></>))}
+            <List renderHeader={() => props.content}>
+                {props.options.map(option => (
+                    <Radio.RadioItem key={option.id} checked={selectedId === option.id} onChange={() => handleSelectedId(option.id)}>
+                        {option.content}
+                    </Radio.RadioItem>
+                ))}
+            </List>
             </Card.Body>
-            <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} />
+            {/* <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} /> */}
         </Card>
        
   )
 }
-export default withRouter(SingleSelect)
+export default inject('OptionMobx')(observer(withRouter(SingleSelect)))
