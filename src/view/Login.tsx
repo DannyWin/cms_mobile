@@ -27,7 +27,7 @@ const Login:React.FC<ILoginProps>=(props)=>{
             console.log(result)
             window.localStorage.setItem("token", result.data.data.token);
             Toast.success('Login successully!',2);
-            props.history.push('/home');
+            props.history.push('/main');
         }else{
             Toast.fail('Uid or Pwd is wrong!',2);
         }

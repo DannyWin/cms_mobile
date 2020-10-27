@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {Flex,WingBlank,List,Picker,Button,WhiteSpace} from 'antd-mobile'
-import {CustomIcon} from '../component/CustomIcon'
+import {CustomIcon} from './CustomIcon'
 import StepLayout from '../layout/StepLayout'
 import '../asset/style/home.less'
 
