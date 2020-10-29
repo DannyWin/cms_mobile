@@ -5,9 +5,8 @@ export interface ILoginProps extends RouteComponentProps {
     MyMobx?: IMobx;
 }
 export interface ISurveyProps extends RouteComponentProps {
-    id: number;
     SurveyMobx?: ISurveyMobx;
-    QuestionMobx: IQuestionMobx;
+    QuestionMobx?: IQuestionMobx;
 }
 export interface IQuestionListProps extends RouteComponentProps {
     surveyId: number;

@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
-import {withRouter,RouteComponentProps} from 'react-router';
-import {Card,Button,WhiteSpace,List,Checkbox} from 'antd-mobile'
+import React from 'react';
+import {withRouter} from 'react-router';
+import {Card,List,Checkbox} from 'antd-mobile'
 import {observer,inject} from 'mobx-react'
-import {ButtonProps} from 'antd-mobile/lib/button/index'
-import { CardHeaderProps } from 'antd-mobile/lib/card/CardHeader';
-import {IMultiSelectProps,IQuestionMobx,IQuestion,IOption} from '../../interface/interface'
+import {IMultiSelectProps} from '../../interface/interface'
 
 
 const MultiSelect:React.FC<IMultiSelectProps>=(props)=>{

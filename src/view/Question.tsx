@@ -1,9 +1,8 @@
 import React,{useState,useEffect} from 'react';
-import {Flex,WhiteSpace,WingBlank,Button, InputItem,Card} from 'antd-mobile'
-import {withRouter,RouteComponentProps} from 'react-router';
-import {CustomIcon} from '../component/CustomIcon'
+import {WhiteSpace,WingBlank,Card} from 'antd-mobile'
+import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
-import {IQuestionProps,IQuestionMobx,IQuestion} from '../interface/interface'
+import {IQuestionProps,IQuestion} from '../interface/interface'
 import StepLayout from '../layout/StepLayout'
 import QuestionFooter from '../component/QuestionFooter';
 import SingleSelect from '../component/question/SingleSelect';

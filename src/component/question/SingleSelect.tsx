@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import {withRouter,RouteComponentProps} from 'react-router';
+import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
-import {Card,Button,WhiteSpace,List,Radio} from 'antd-mobile'
-import {ButtonProps} from 'antd-mobile/lib/button/index'
-import { CardHeaderProps } from 'antd-mobile/lib/card/CardHeader';
-import {ISingleSelectProps,IQuestionMobx,IQuestion,IOption} from '../../interface/interface'
+import {Card,List,Radio} from 'antd-mobile'
+import {ISingleSelectProps} from '../../interface/interface'
 
 const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
     const [selectedId,changeSelectedId]=useState(0);

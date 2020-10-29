@@ -1,18 +1,13 @@
 import React from 'react';
-import {Flex,WhiteSpace,WingBlank,Button, InputItem,Card} from 'antd-mobile'
-import {withRouter,RouteComponentProps} from 'react-router';
-import {CustomIcon} from '../component/CustomIcon'
+import {WhiteSpace,WingBlank,Card} from 'antd-mobile'
 import {observer,inject} from 'mobx-react'
-import {IQuestionListProps,IQuestionMobx,IQuestion} from '../interface/interface'
+import {IQuestionListProps} from '../interface/interface'
 import StepLayout from '../layout/StepLayout'
-import QuestionFooter from '../component/QuestionFooter';
 import SingleSelect from '../component/question/SingleSelect';
 import MultiSelect from '../component/question/MultiSelect';
 
 
 const QuestionList:React.FC<IQuestionListProps>=(props)=>{
-    function goBack(){}
-    function goNext(){}
   
     return (
         <StepLayout title="Question" current={1}>

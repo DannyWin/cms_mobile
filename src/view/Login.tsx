@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {withRouter,RouteComponentProps} from 'react-router';
+import {withRouter} from 'react-router';
 import {Flex,WhiteSpace,WingBlank,Button, InputItem,Toast} from 'antd-mobile'
 import {CustomIcon} from '../component/CustomIcon'
 import {observer,inject} from 'mobx-react'

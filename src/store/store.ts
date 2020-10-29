@@ -1,14 +1,13 @@
-import MyMobx from './mobx'
-import BaseMobx from './base'
-import Survey from './survey'
-import Question from './question'
-
+import MyMobx from "./mobx";
+import BaseMobx from "./base";
+import SurveyMobx from "./survey";
+import QuestionMobx from "./question";
 
 const stores = {
-  BaseMobx,
-  MyMobx,
-  Survey,
-  Question
-}
+    BaseMobx,
+    MyMobx,
+    SurveyMobx,
+    QuestionMobx,
+};
 
-export default stores
+export default stores;

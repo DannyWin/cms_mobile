@@ -4,7 +4,7 @@ import {CustomIcon} from '../component/CustomIcon'
 import {IMainProps} from '../interface/interface'
 import Home from '../component/Home';
 import Survey from '../component/Survey';
-
+import '../asset/style/main.less'
 
 const Main:React.FC<IMainProps>=(props)=>{
     const [isHidden,setIsHidden]=useState(false);
@@ -18,7 +18,7 @@ const Main:React.FC<IMainProps>=(props)=>{
             badge={0}
             onPress={() => setSelectedTab('Survey')}
           >
-               <Survey {...props}/>
+               <Survey/>
           </TabBar.Item>
           <TabBar.Item title="Home" key="Home" icon={<CustomIcon type="#icon-user"></CustomIcon>} 
             selectedIcon={ <CustomIcon type="#icon-user"></CustomIcon>}

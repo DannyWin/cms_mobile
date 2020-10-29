@@ -1,6 +1,6 @@
 import React from 'react'
 import {Flex,Button} from 'antd-mobile'
-import {withRouter,RouteComponentProps} from 'react-router';
+import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
 import {IQuestionFooterProps} from '../interface/interface'
 
