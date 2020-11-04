@@ -25,4 +25,4 @@ const QuestionFooter:React.FC<IQuestionFooterProps>=(props)=>{
       </Flex>
   )
 }
-export default inject('OptionMobx')(observer(withRouter(QuestionFooter)))
+export default inject('OptionMobx')(withRouter(observer(QuestionFooter)))

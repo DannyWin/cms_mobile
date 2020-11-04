@@ -13,7 +13,7 @@ class SurveyMobx implements ISurveyMobx {
     @action
     setSurveys = (surveys: ISurvey[]): void => {
         console.log(surveys);
-        this.surveys = this.surveys.concat(surveys);
+        this.surveys = surveys;
     };
     @action
     setSelectedSurvey = (survey: ISurvey): void => {

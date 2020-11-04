@@ -6,7 +6,6 @@ import {ISurveyProps,ISurvey} from '../interface/interface'
 import StepLayout from '../layout/StepLayout'
 import {apiGetSurvey} from '../api/api'
 
-
 const Survey:React.FC<ISurveyProps>=(props)=>{
     let [checkedId,checkChange]=useState(0);
     useEffect(()=>{
@@ -14,10 +13,11 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
             const result=await apiGetSurvey();
             if(result.status===200){
                 
-                props.SurveyMobx!.setSurveys(result.data.data.survey as ISurvey[]);
+                props.SurveyMobx!.setSurveys(result.data.data.surveys as ISurvey[]);
+                console.log(props.SurveyMobx!.surveys);
             }
         })();
-    },[props.SurveyMobx]);
+    },[]);
 
     function selectSurvey(){
         if(props.SurveyMobx && checkedId>0){
@@ -48,4 +48,4 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
         </StepLayout>
     )
 }
-export default inject('SurveyMobx','QuestionMobx')(observer(withRouter(Survey)))
+export default inject('SurveyMobx','QuestionMobx')(withRouter(observer(Survey)))

@@ -29,4 +29,4 @@ const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
        
   )
 }
-export default inject('OptionMobx')(observer(withRouter(SingleSelect)))
+export default inject('OptionMobx')(withRouter(observer(SingleSelect)))

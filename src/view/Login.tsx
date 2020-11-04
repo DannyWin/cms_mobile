@@ -57,4 +57,4 @@ const Login:React.FC<ILoginProps>=(props)=>{
         </>
     )
 }
-export default inject('MyMobx')(observer(withRouter(Login)));
+export default inject('MyMobx')(withRouter(observer(Login)));

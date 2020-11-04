@@ -37,4 +37,4 @@ const MultiSelect:React.FC<IMultiSelectProps>=(props)=>{
        
   )
 }
-export default inject('OptionMobx')(observer(withRouter(MultiSelect)))
+export default inject('OptionMobx')(withRouter(observer(MultiSelect)))

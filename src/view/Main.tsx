@@ -4,6 +4,7 @@ import {CustomIcon} from '../component/CustomIcon'
 import {IMainProps} from '../interface/interface'
 import Home from '../component/Home';
 import Survey from '../component/Survey';
+import {observer} from 'mobx-react'
 import '../asset/style/main.less'
 
 const Main:React.FC<IMainProps>=(props)=>{
@@ -31,4 +32,4 @@ const Main:React.FC<IMainProps>=(props)=>{
         </TabBar>
     )
 }
-export default Main
+export default observer(Main)
