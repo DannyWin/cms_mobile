@@ -1,39 +1,44 @@
-import axios from 'axios';
+import axios from "axios";
 
-axios.defaults.baseURL = 'http://127.0.0.1:7001';
-axios.defaults.timeout = 20000
+axios.defaults.baseURL = "http://127.0.0.1:7001";
+axios.defaults.timeout = 20000;
 
 axios.interceptors.request.use(
-    config => {
+    (config) => {
         // var curTime = new Date();
         // var expiretime = new Date(Date.parse(store.state.tokenExpire))
 
         // if (store.state.token && (curTime < expiretime && store.state.tokenExpire)) {
         //     // 判断是否存在token，如果存在的话，则每个http header都加上token
-            
-            
+
         // }
-        config.headers.Authorization = "Bearer " + window.localStorage.getItem('token')//store.state.token;
+        config.headers.Authorization =
+            "Bearer " + window.localStorage.getItem("token"); //store.state.token;
         //saveRefreshTime();
         return config;
     },
-    err => {
+    (err) => {
         return Promise.reject(err);
     }
 );
 axios.interceptors.response.use(
-    (response) => {return response;},  
+    (response) => {
+        return response;
+    },
     (error) => {
         // 超时请求处理
         var originalRequest = error.config;
-        if(error.code === 'ECONNABORTED' && error.message.indexOf('timeout')!==-1 && !originalRequest._retry){
-
+        if (
+            error.code === "ECONNABORTED" &&
+            error.message.indexOf("timeout") !== -1 &&
+            !originalRequest._retry
+        ) {
             // Vue.prototype.$message({
             //     message: '请求超时！',
             //     type: 'error'
             // });
 
-            originalRequest._retry = true
+            originalRequest._retry = true;
             return null;
         }
         if (error.response) {
@@ -50,7 +55,6 @@ axios.interceptors.response.use(
                 //             // });
                 //             var token = res.response.token;
                 //             store.commit("saveToken", token);
-
                 //             var curTime = new Date();
                 //             var expiresTimeStamp=JSON.parse(decodeURIComponent(escape(window.atob(token.split('.')[1])))).aud.exp;
                 //             //var expireDate = new Date(curTime.setSeconds(curTime.getSeconds() + res.expiresIn));
@@ -69,7 +73,6 @@ axios.interceptors.response.use(
                 //     // 返回 401，并且不知用户操作活跃期内 清除token信息并跳转到登录页面
                 //     ToLogin()
                 // }
-
             }
             // 403 无权限
             if (error.response.status === 403) {
@@ -79,17 +82,16 @@ axios.interceptors.response.use(
                 // });
                 return null;
             }
-            if(error.response.status >=300 && error.response.status<500){
+            if (error.response.status >= 300 && error.response.status < 500) {
                 return error.response;
-            }else {
+            } else {
                 return Promise.reject(error);
             }
         }
         return ""; // 返回接口返回的错误信息
-
     }
-)
-  
+);
+
 // const ToLogin = params => {
 //     store.commit("saveToken", "");
 //     store.commit("saveTokenExpire", "");
@@ -106,29 +108,32 @@ axios.interceptors.response.use(
 
 // };
 
-
-
-export const saveRefreshTime = (params:any) => {
-
+export const saveRefreshTime = (params: any) => {
     let nowTime = new Date();
-    let lastRefreshTime = window.localStorage.refreshTime ? new Date(window.localStorage.refreshTime) : new Date(-1);
-    let expireTime = new Date(Date.parse(window.localStorage.tokenExpire))
+    let lastRefreshTime = window.localStorage.refreshTime
+        ? new Date(window.localStorage.refreshTime)
+        : new Date(-1);
+    let expireTime = new Date(Date.parse(window.localStorage.tokenExpire));
 
-    let refreshCount=1;//滑动系数
-    if (lastRefreshTime >= nowTime) {//token在活跃期内
-        lastRefreshTime=nowTime>expireTime ? nowTime:expireTime;
+    let refreshCount = 1; //滑动系数
+    if (lastRefreshTime >= nowTime) {
+        //token在活跃期内
+        lastRefreshTime = nowTime > expireTime ? nowTime : expireTime;
         lastRefreshTime.setMinutes(lastRefreshTime.getMinutes() + refreshCount);
         window.localStorage.refreshTime = lastRefreshTime;
-    }else {
+    } else {
         window.localStorage.refreshTime = new Date(-1);
     }
 };
 
-
-interface ILoginParams{
-    uid:string,
-    pwd:string
+interface ILoginParams {
+    uid: string;
+    pwd: string;
 }
 
-export const apiLogin = async (params:ILoginParams) => await axios.post('/login',params).then( ( res ) => res );
-export const apiGetSurvey = async () => await axios.get(`/survey`,{}).then( ( res ) => res );//获取该用户的survey列表
+export const apiLogin = async (params: ILoginParams) =>
+    await axios.post("/login", params).then((res) => res);
+export const apiGetSurvey = async () =>
+    await axios.get(`/survey`, {}).then((res) => res); //获取该用户的survey列表
+export const apiGetQuestion = async (surveyId: number) =>
+    await axios.get(`/survey/${surveyId}/question`, {}).then((res) => res); //获取该用户的question列表
