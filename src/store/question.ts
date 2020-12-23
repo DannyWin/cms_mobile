@@ -17,6 +17,7 @@ class QuestionMobx implements IQuestionMobx {
     @action
     setQuestions = (questions: Array<IQuestion>): void => {
         this.questions = questions;
+        console.log(questions);
         //SurveyMobx.surveys.filter(survey=>survey.id===this.surveyId)[0].questions=questions;
     };
 }

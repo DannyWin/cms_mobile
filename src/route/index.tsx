@@ -22,7 +22,7 @@ export const routes=[
     {path:'/login',component:Login},
     {path:'/home', component:Home},
     {path:'/main', component:Main},
-    {path:'/survey',component:Survey,
+    {path:'/survey',exact:true,component:Survey,
         routes:[
             {path:'/:sid/question',exact:true,component:QuestionList},
             {path:'/:sid/question/:qid',component:Question}
