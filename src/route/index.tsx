@@ -23,11 +23,14 @@ export const routes=[
     {path:'/home', component:Home},
     {path:'/main', component:Main},
     {path:'/survey',exact:true,component:Survey,
-        routes:[
-            {path:'/:sid/question',exact:true,component:QuestionList},
-            {path:'/:sid/question/:qid',component:Question}
-        ]
+   
+        // routes:[
+        //     {path:'/survey/:sid/question',exact:true,component:QuestionList},
+        //     {path:'/survey/:sid/question/:qid',exact:true,component:Question}
+        // ]
     },
+    {path:'/survey/:sid/question',exact:true,component:QuestionList},
+    {path:'/survey/:sid/question/:qid',exact:true,component:Question},
     {path:'*',component:NotFound},
 
 ];

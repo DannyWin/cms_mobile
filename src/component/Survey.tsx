@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {WhiteSpace,WingBlank,Button,Radio, List} from 'antd-mobile'
+import {WhiteSpace,WingBlank,Button,Radio, List, Toast} from 'antd-mobile'
 import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
 import {ISurveyProps,ISurvey,IQuestion} from '../interface/interface'
@@ -27,6 +27,8 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
                 console.log(props.QuestionMobx!.questions);
                 props.history.push(`/survey/${checkedId}/question`);
             }
+        }else{
+            Toast.success('Please select a survey!',1.5);
         }
         // if(props.SurveyMobx && checkedId>0){
         //     const surveySelected=props.SurveyMobx.surveys.find(s=>s.id===checkedId);
@@ -50,7 +52,7 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
                      { props.SurveyMobx!.surveys.map(survey=><Radio.RadioItem key={survey.id} checked={checkedId===survey.id} onChange={() => checkChange(survey.id)}>{survey.name}</Radio.RadioItem>)}
                 </List>
 
-                <Button type="primary" onClick={()=>selectSurvey()}>确定</Button>
+                <Button type="primary" disabled={checkedId<=0} onClick={()=>selectSurvey()}>确定</Button>
                 <WhiteSpace size="lg" />
             </WingBlank>
         </StepLayout>

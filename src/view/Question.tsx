@@ -7,10 +7,10 @@ import StepLayout from '../layout/StepLayout'
 import QuestionFooter from '../component/QuestionFooter';
 import SingleSelect from '../component/question/SingleSelect';
 import MultiSelect from '../component/question/MultiSelect';
-
+import {questionSort} from '../util/const';
 
 const Question:React.FC<IQuestionProps>=(props)=>{
-    const [question,changeQuestion]=useState<IQuestion>({id:0,order:0,content:'',options:[],type:0,prev:0, next:0});
+    const [question,changeQuestion]=useState<IQuestion>({id:0,order:0,content:'',options:[],sort:{id:0},prev:0, next:0});
 
     useEffect(()=>{
         const qu=props.QuestionMobx.questions.find(q=>q.id=== parseInt(props.match.params.qid))
@@ -25,8 +25,8 @@ const Question:React.FC<IQuestionProps>=(props)=>{
                 <Card.Header {...props.question}/>
                 <Card.Body>
                     {
-                          (question.type===0 && <SingleSelect {...question} ></SingleSelect>)
-                       || (question.type===1 && <MultiSelect {...question} ></MultiSelect>)
+                          (question.sort.id===questionSort.singleSelect && <SingleSelect {...question} ></SingleSelect>)
+                       || (question.sort.id===questionSort.multiSelect && <MultiSelect {...question} ></MultiSelect>)
                     }
                 </Card.Body>
                 {/* <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} /> */}

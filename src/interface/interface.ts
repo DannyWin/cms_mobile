@@ -11,7 +11,7 @@ export interface ISurveyProps extends RouteComponentProps {
 export interface IQuestionListProps extends RouteComponentProps {
     surveyId: number;
     surveyName: string;
-    questions: Array<IQuestion>;
+    QuestionMobx?: IQuestionMobx;
 }
 export interface IQuestionProps extends RouteComponentProps<ParamsInfo> {
     id: number;
@@ -51,7 +51,7 @@ export interface IQuestion {
     order: number;
     content: string;
     options: Array<IOption>;
-    type: number;
+    sort: { id: number };
     prev: number;
     next: number;
 }
