@@ -10,7 +10,7 @@ import MultiSelect from '../component/question/MultiSelect';
 import {questionSort} from '../util/const';
 
 const Question:React.FC<IQuestionProps>=(props)=>{
-    const [question,changeQuestion]=useState<IQuestion>({id:0,order:0,content:'',options:[],sort:{id:0},prev:0, next:0});
+    const [question,changeQuestion]=useState<IQuestion>({id:0,index:0,order:0,content:'',options:[],sort:{id:0},prev:0, next:0});
 
     useEffect(()=>{
         const qu=props.QuestionMobx.questions.find(q=>q.id=== parseInt(props.match.params.qid))

@@ -1,6 +1,8 @@
 const questionSort = {
-    singleSelect: 0,
-    multiSelect: 1,
+    singleSelect: 1,
+    multiSelect: 2,
+    shortAnswer: 3,
+    essay: 4,
 };
 
 export { questionSort };

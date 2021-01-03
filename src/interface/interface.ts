@@ -32,6 +32,12 @@ export interface ISingleSelectProps extends IQuestion, RouteComponentProps {
 export interface IMultiSelectProps extends IQuestion, RouteComponentProps {
     OptionMobx?: IOptionMobx;
 }
+export interface IShortAnswerProps extends IQuestion, RouteComponentProps {
+    OptionMobx?: IOptionMobx;
+}
+export interface IEssayProps extends IQuestion, RouteComponentProps {
+    OptionMobx?: IOptionMobx;
+}
 
 export interface IQuestionFooterProps extends RouteComponentProps {
     OptionMobx?: IOptionMobx;
@@ -48,6 +54,7 @@ export interface ISurvey {
 
 export interface IQuestion {
     id: number;
+    index: number;
     order: number;
     content: string;
     options: Array<IOption>;

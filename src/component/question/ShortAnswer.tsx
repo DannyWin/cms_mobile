@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
-import {Card,List,Radio,WhiteSpace} from 'antd-mobile'
-import {ISingleSelectProps} from '../../interface/interface'
+import {Card,TextareaItem,List,Radio,WhiteSpace} from 'antd-mobile'
+import {IShortAnswerProps} from '../../interface/interface'
 
-const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
+const ShortAnswer:React.FC<IShortAnswerProps>=(props)=>{
     const [selectedId,changeSelectedId]=useState(0);
     function handleSelectedId(id:number){
         changeSelectedId(id);
@@ -18,11 +18,13 @@ const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
             <Card.Header/>
             <Card.Body> */}
             <List renderHeader={() => props.index+"."+props.content}>
-                {props.options.map(option => (
+
+                {/* {props.options.map(option => (
                     <Radio.RadioItem key={option.id} checked={selectedId === option.id} onChange={() => handleSelectedId(option.id)}>
                         {option.content}
                     </Radio.RadioItem>
-                ))}
+                ))} */}
+                <TextareaItem placeholder="Please input your points" rows={5} count={100}></TextareaItem>
             </List>
             {/* </Card.Body> */}
             {/* <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} /> */}
@@ -32,4 +34,4 @@ const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
        
   )
 }
-export default inject('OptionMobx')(withRouter(observer(SingleSelect)))
+export default inject('OptionMobx')(withRouter(observer(ShortAnswer)))
