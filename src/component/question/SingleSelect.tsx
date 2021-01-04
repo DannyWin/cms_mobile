@@ -3,6 +3,7 @@ import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
 import {Card,List,Radio,WhiteSpace} from 'antd-mobile'
 import {ISingleSelectProps} from '../../interface/interface'
+import QuestionLayout from '../../layout/question/QuestionLayout'
 
 const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
     const [selectedId,changeSelectedId]=useState(0);
@@ -14,6 +15,8 @@ const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
     }
     return (
         <>
+        <QuestionLayout>
+            </QuestionLayout>
         {/* <Card>
             <Card.Header/>
             <Card.Body> */}
