@@ -8,7 +8,7 @@ export interface ISurveyProps extends RouteComponentProps {
     SurveyMobx?: ISurveyMobx;
     QuestionMobx?: IQuestionMobx;
 }
-export interface IQuestionListProps extends RouteComponentProps {
+export interface IQuestionListProps extends IQuestion, RouteComponentProps {
     surveyId: number;
     surveyName: string;
     QuestionMobx?: IQuestionMobx;
@@ -61,6 +61,7 @@ export interface IQuestion {
     sort: { id: number };
     prev: number;
     next: number;
+    layout: number;
 }
 export interface IOption {
     id: number;

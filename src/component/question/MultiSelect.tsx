@@ -25,17 +25,16 @@ const MultiSelect:React.FC<IMultiSelectProps>=(props)=>{
             {/* <Card>
                 <Card.Header/>
                 <Card.Body> */}
-                <List renderHeader={() => props.index+"."+props.content}>
+                {/* <List renderHeader={() => props.index+"."+props.content}> */}
                     {props.options.map(option => (
                         <Checkbox.CheckboxItem key={option.id} checked={selectedIds.includes(option.id)} onChange={() => changeSelectedId(option.id)}>
                             {option.content}
                         </Checkbox.CheckboxItem>
                     ))}
-                </List>
+                {/* </List> */}
                 {/* </Card.Body> */}
                 {/* <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} /> */}
             {/* </Card> */}
-            <WhiteSpace size="lg" />
         </>
   )
 }
