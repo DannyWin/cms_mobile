@@ -12,6 +12,7 @@ export interface IQuestionListProps extends IQuestion, RouteComponentProps {
     surveyId: number;
     surveyName: string;
     QuestionMobx?: IQuestionMobx;
+    OptionMobx?: IOptionMobx;
 }
 export interface IQuestionProps extends RouteComponentProps<ParamsInfo> {
     id: number;
@@ -69,6 +70,13 @@ export interface IOption {
     content: string;
 }
 
+export interface ISelectedOption {
+    qid: number;
+    oids: number[] | string[];
+    startDate: Date;
+    endDate: Date;
+}
+
 //mobx
 
 export interface IMobx {
@@ -82,17 +90,19 @@ export interface ISurveyMobx {
     setSelectedSurvey(survey: ISurvey): void;
 }
 export interface IQuestionMobx {
-    surveyId: number;
+    survey: ISurvey | null;
     questions: Array<IQuestion>;
-    setSurveyId(id: number): void;
+    setSurvey(survey: ISurvey): void;
     setQuestions(questions: Array<IQuestion>): void;
 }
 export interface ISingleSelectMobx {}
 export interface IOptionMobx {
     selectedId: number | Array<number>;
+    selectedOptions: Array<ISelectedOption>;
     //selectedIds:Array<number>;
     ids: Array<number | Array<number>>;
     setSelectedId(id: number | Array<number>): void;
     //setSelectedIds(ids:Array<number>):void;
     addIds(): void;
+    setSelectedOption(selectedOption: ISelectedOption): void;
 }

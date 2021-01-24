@@ -1,4 +1,5 @@
 import axios from "axios";
+import { ISelectedOption } from "../interface/interface";
 
 axios.defaults.baseURL = "http://127.0.0.1:7001";
 axios.defaults.timeout = 20000;
@@ -130,6 +131,10 @@ interface ILoginParams {
     uid: string;
     pwd: string;
 }
+interface IAnswerParams {
+    surveyId: number;
+    selectedOptions: ISelectedOption[];
+}
 
 export const apiLogin = async (params: ILoginParams) =>
     await axios.post("/login", params).then((res) => res);
@@ -137,3 +142,7 @@ export const apiGetSurvey = async () =>
     await axios.get(`/survey`, {}).then((res) => res); //获取该用户的survey列表
 export const apiGetQuestion = async (surveyId: number) =>
     await axios.get(`/survey/${surveyId}/question`, {}).then((res) => res); //获取该用户的question列表
+export const apiSaveAnswer = async (params: IAnswerParams) =>
+    await axios
+        .post(`/survey/${params.surveyId}/answer`, params.selectedOptions)
+        .then((res) => res);

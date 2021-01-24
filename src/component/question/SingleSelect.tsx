@@ -9,24 +9,19 @@ const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
     function handleSelectedId(id:number){
         changeSelectedId(id);
         if(props.OptionMobx){
-            props.OptionMobx?.setSelectedId(id);
+            props.OptionMobx!.setSelectedOption({qid:props.id,oids:[id]})
         }
     }
     return (
         <>
-        {/* <Card>
-            <Card.Header/>
-            <Card.Body> */}
-            {/* <List renderHeader={() => props.index+"."+props.content}> */}
+            <List renderHeader={() => props.index+"."+props.content}>
                 {props.options.map(option => (
                     <Radio.RadioItem key={option.id} checked={selectedId === option.id} onChange={() => handleSelectedId(option.id)}>
                         {option.content}
                     </Radio.RadioItem>
                 ))}
-            {/* </List> */}
-            {/* </Card.Body> */}
-            {/* <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} /> */}
-        {/* </Card> */}
+            </List>
+            <WhiteSpace size="lg"/>
          </>
        
   )

@@ -1,18 +1,17 @@
 import { observable, action } from "mobx";
 import SurveyMobx from "./survey";
-import { IQuestion, IQuestionMobx } from "../interface/interface";
+import { IQuestion, IQuestionMobx, ISurvey } from "../interface/interface";
 
 class QuestionMobx implements IQuestionMobx {
-    @observable surveyId: number;
+    @observable survey: ISurvey | null;
     @observable questions: Array<IQuestion>;
-
     constructor() {
-        this.surveyId = 0;
+        this.survey = null;
         this.questions = [];
     }
     @action
-    setSurveyId = (id: number): void => {
-        this.surveyId = id;
+    setSurvey = (survey: ISurvey): void => {
+        this.survey = survey;
     };
     @action
     setQuestions = (questions: Array<IQuestion>): void => {

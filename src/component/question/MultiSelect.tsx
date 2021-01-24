@@ -16,25 +16,21 @@ const MultiSelect:React.FC<IMultiSelectProps>=(props)=>{
             selectedIds.splice(index,1);
         }
         if(props.OptionMobx){
-            props.OptionMobx.setSelectedId(selectedIds);
+            console.log(selectedIds);
+            props.OptionMobx!.setSelectedOption({qid:props.id,oids:selectedIds})
         }
     }
 
     return (
         <>
-            {/* <Card>
-                <Card.Header/>
-                <Card.Body> */}
-                {/* <List renderHeader={() => props.index+"."+props.content}> */}
-                    {props.options.map(option => (
-                        <Checkbox.CheckboxItem key={option.id} checked={selectedIds.includes(option.id)} onChange={() => changeSelectedId(option.id)}>
-                            {option.content}
-                        </Checkbox.CheckboxItem>
-                    ))}
-                {/* </List> */}
-                {/* </Card.Body> */}
-                {/* <Card.Footer content={<Button type="ghost" onClick={()=>goBack()}>Back</Button>} extra={<Button type="primary" onClick={()=>goNext()}>Next</Button>} /> */}
-            {/* </Card> */}
+            <List renderHeader={() => props.index+"."+props.content}>
+                {props.options.map(option => (
+                    <Checkbox.CheckboxItem key={option.id}  onChange={() => changeSelectedId(option.id)}>
+                        {option.content}
+                    </Checkbox.CheckboxItem>
+                ))}
+            </List>
+            <WhiteSpace size="lg"/>
         </>
   )
 }

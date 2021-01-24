@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from 'react';
-import {WhiteSpace,WingBlank,Button,Radio, List, Toast} from 'antd-mobile'
+import {WhiteSpace,WingBlank,Button,Radio, List, Toast, Flex} from 'antd-mobile'
 import {withRouter} from 'react-router';
 import {observer,inject} from 'mobx-react'
 import {ISurveyProps,ISurvey,IQuestion} from '../interface/interface'
@@ -23,6 +23,11 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
         if(checkedId>0){
             const result=await apiGetQuestion(checkedId);
             if(result.status===200){
+                const selectedSurvey=props.SurveyMobx!.surveys.find(s=>s.id===checkedId);
+                if(selectedSurvey){
+                    props.SurveyMobx!.setSelectedSurvey(selectedSurvey);
+                    props.QuestionMobx!.setSurvey(selectedSurvey);
+                }
                 props.QuestionMobx!.setQuestions(result.data.data.questions as IQuestion[]);
                 console.log(props.QuestionMobx!.questions);
                 props.history.push(`/survey/${checkedId}/question`);
@@ -51,9 +56,10 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
                 <List>
                      { props.SurveyMobx!.surveys.map(survey=><Radio.RadioItem key={survey.id} checked={checkedId===survey.id} onChange={() => checkChange(survey.id)}>{survey.name}</Radio.RadioItem>)}
                 </List>
-
-                <Button type="primary" disabled={checkedId<=0} onClick={()=>selectSurvey()}>确定</Button>
                 <WhiteSpace size="lg" />
+                <Flex justify="center">
+                    <Button inline type="primary" disabled={checkedId<=0} onClick={()=>selectSurvey()}>Confirm</Button>
+                </Flex>
             </WingBlank>
         </StepLayout>
     )
