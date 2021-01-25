@@ -18,6 +18,7 @@ const SingleSelect:React.FC<ISingleSelectProps>=(props)=>{
                 {props.options.map(option => (
                     <Radio.RadioItem key={option.id} checked={selectedId === option.id} onChange={() => handleSelectedId(option.id)}>
                         {option.content}
+                        <List.Item.Brief>{option.note}</List.Item.Brief>
                     </Radio.RadioItem>
                 ))}
             </List>

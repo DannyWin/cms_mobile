@@ -68,13 +68,14 @@ export interface IOption {
     id: number;
     order: number;
     content: string;
+    note: string;
 }
 
 export interface ISelectedOption {
     qid: number;
     oids: number[] | string[];
-    startDate: Date;
-    endDate: Date;
+    startDate?: Date;
+    endDate?: Date;
 }
 
 //mobx
