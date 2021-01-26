@@ -50,6 +50,9 @@ export interface ISurvey {
     id: number;
     order: number;
     name: string;
+    startDate?: Date;
+    endDate?: Date;
+    submitCount: number;
     questions: Array<IQuestion>;
 }
 

@@ -5,6 +5,7 @@ import {observer,inject} from 'mobx-react'
 import {ISurveyProps,ISurvey,IQuestion} from '../interface/interface'
 import StepLayout from '../layout/StepLayout'
 import {apiGetSurvey,apiGetQuestion} from '../api/api'
+import { formatDate } from '../util/dateHelper';
 
 const Survey:React.FC<ISurveyProps>=(props)=>{
     let [checkedId,checkChange]=useState(0);
@@ -54,7 +55,14 @@ const Survey:React.FC<ISurveyProps>=(props)=>{
         <StepLayout title="Survey" current={1}>
             <WingBlank style={{flex:1}}>
                 <List>
-                     { props.SurveyMobx!.surveys.map(survey=><Radio.RadioItem key={survey.id} checked={checkedId===survey.id} onChange={() => checkChange(survey.id)}>{survey.name}</Radio.RadioItem>)}
+                     { props.SurveyMobx!.surveys.map(survey=>(
+                     <Radio.RadioItem key={survey.id} checked={checkedId===survey.id} onChange={() => checkChange(survey.id)}>
+                         {survey.name}
+                         <div  onClick={() => checkChange(survey.id)}>
+                         <List.Item.Brief>{'提交时限:'+formatDate(survey.startDate!)+' - '+formatDate(survey.endDate!)}</List.Item.Brief>
+                         <List.Item.Brief>{'提交次数:'+survey.submitCount}</List.Item.Brief>
+                         </div>
+                    </Radio.RadioItem>))}
                 </List>
                 <WhiteSpace size="lg" />
                 <Flex justify="center">

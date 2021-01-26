@@ -7,7 +7,13 @@ class SurveyMobx implements ISurveyMobx {
 
     constructor() {
         this.surveys = [];
-        this.selectedSurvey = { id: 0, name: "", order: 0, questions: [] };
+        this.selectedSurvey = {
+            id: 0,
+            name: "",
+            order: 0,
+            questions: [],
+            submitCount: 0,
+        };
     }
 
     @action
