@@ -66,6 +66,7 @@ export interface IQuestion {
     prev: number;
     next: number;
     layout: number;
+    form: any;
 }
 export interface IOption {
     id: number;
